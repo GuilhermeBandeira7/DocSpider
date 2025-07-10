@@ -1,5 +1,6 @@
 ﻿using DocSpider.Web.Common.Api;
-using DocSpider.Web.Common.Endpoint.Documents;
+using DocSpider.Web.Common.Endpoint.Documents.Download;
+using DocSpider.Web.Common.Endpoint.Documents.Upload;
 
 namespace DocSpider.Web.Common.Endpoint
 {
@@ -14,9 +15,10 @@ namespace DocSpider.Web.Common.Endpoint
                 .WithTags("Health Check")
                 .MapGet("/", () => new { message = "OK" });
 
-            endpoints.MapGroup("v1/documents/upload")
+            endpoints.MapGroup("v1/documents")
             .WithTags("Documents")
-            .MapEndpoint<UploadDocumentEndpoint>();
+            .MapEndpoint<UploadDocumentEndpoint>()
+            .MapEndpoint<DownloadDocumentEndpoint>();
         }
 
         private static IEndpointRouteBuilder MapEndpoint<TEndpoint>(this IEndpointRouteBuilder app)

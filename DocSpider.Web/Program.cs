@@ -7,6 +7,7 @@ builder.AddDataContexts();
 builder.AddMediatRDependency();
 builder.AddDocumentation();
 builder.AddValidations();
+builder.AddServices();
 
 var app = builder.Build();
 

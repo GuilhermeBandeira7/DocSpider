@@ -1,5 +1,4 @@
-﻿using Azure.Core;
-using DocSpider.BuildingBlocks.API;
+﻿using DocSpider.BuildingBlocks.API;
 using DocSpider.BuildingBlocks.CQRS;
 using DocSpider.Domain.Models;
 using DocSpider.Infrastructure.Context;
@@ -7,11 +6,9 @@ using FluentValidation;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 
-namespace DocSpider.Web.Common.Endpoint.Documents
+namespace DocSpider.Web.Common.Endpoint.Documents.Upload
 {
-    public record UploadDocumentCommand(Document Document) : ICommand<UploadDocumentResult>;
-
-    public record UploadDocumentResult(Response<bool> UploadSuccess);
+    public record UploadDocumentCommand(Document Document) : ICommand<Response<string>>;
 
     public class UploadDocumentCommandValidator : AbstractValidator<UploadDocumentCommand>
     {
@@ -37,11 +34,11 @@ namespace DocSpider.Web.Common.Endpoint.Documents
         }
     }
 
-    public class UploadDocumentHandler(AppDbContext Context) 
-        : ICommandHandler<UploadDocumentCommand, UploadDocumentResult>
+    public class UploadDocumentHandler(AppDbContext Context)
+        : ICommandHandler<UploadDocumentCommand, Response<string>>
     {
-        public async Task<UploadDocumentResult> Handle(UploadDocumentCommand command, CancellationToken cancellationToken)
-        {       
+        public async Task<Response<string>> Handle(UploadDocumentCommand command, CancellationToken cancellationToken)
+        {
             var doc = command.Document.Adapt<Document>();
 
             var user = await Context
@@ -54,7 +51,7 @@ namespace DocSpider.Web.Common.Endpoint.Documents
 
             await Context.SaveChangesAsync(cancellationToken);
 
-            return new UploadDocumentResult(new Response<bool>(true, 201, "Document Uploaded"));
+            return new Response<string>(doc.DocumentName ,201, "Document Uploaded");
         }
     }
 }

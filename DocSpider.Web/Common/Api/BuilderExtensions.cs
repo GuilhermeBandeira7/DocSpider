@@ -1,4 +1,6 @@
-﻿using DocSpider.BuildingBlocks.Behaviours;
+﻿using DocSpider.Application.Common.Interfaces;
+using DocSpider.Application.Features.Documents.Factories;
+using DocSpider.BuildingBlocks.Behaviours;
 using DocSpider.Infrastructure.Context;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
@@ -38,6 +40,11 @@ public static class BuilderExtensions
     public static void AddValidations(this WebApplicationBuilder builder)
     {
         builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
+    }
+
+    public static void AddServices(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddScoped<IDocumentFactory, DocumentFactory>();
     }
 }
 
