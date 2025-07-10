@@ -1,7 +1,9 @@
-﻿using DocSpider.BuildingBlocks.API;
+﻿using Azure.Core;
+using DocSpider.BuildingBlocks.API;
 using DocSpider.BuildingBlocks.CQRS;
 using DocSpider.Domain.Models;
 using DocSpider.Infrastructure.Context;
+using FluentValidation;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,11 +13,36 @@ namespace DocSpider.Web.Common.Endpoint.Documents
 
     public record UploadDocumentResult(Response<bool> UploadSuccess);
 
-    public class UploadDocumentHandler(AppDbContext Context) : ICommandHandler<UploadDocumentCommand, UploadDocumentResult>
+    public class UploadDocumentCommandValidator : AbstractValidator<UploadDocumentCommand>
     {
-        public async Task<UploadDocumentResult> Handle(UploadDocumentCommand request, CancellationToken cancellationToken)
+        public UploadDocumentCommandValidator()
         {
-            var doc = request.Document.Adapt<Document>();
+            RuleFor(f => f.Document.FileContent)
+            .NotNull()
+            .Must(f => f?.Length > 0)
+            .WithMessage("File cannot be empty");
+
+            RuleFor(f => f.Document.DocumentName)
+            .NotNull()
+            .WithMessage("File name cannot be empty")
+            .Must(BeAllowedFileType)
+            .WithMessage("File name cannot be empty");
+        }
+
+        private bool BeAllowedFileType(string? fileName)
+        {
+            var restrictedExtensions = new[] { ".exe", ".zip", ".bat" };
+            var fileExtension = Path.GetExtension(fileName)?.ToLowerInvariant();
+            return !restrictedExtensions.Contains(fileExtension);
+        }
+    }
+
+    public class UploadDocumentHandler(AppDbContext Context) 
+        : ICommandHandler<UploadDocumentCommand, UploadDocumentResult>
+    {
+        public async Task<UploadDocumentResult> Handle(UploadDocumentCommand command, CancellationToken cancellationToken)
+        {       
+            var doc = command.Document.Adapt<Document>();
 
             var user = await Context
                 .Users

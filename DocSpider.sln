@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocSpider.Web", "DocSpider.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocSpider.BuildingBlocks", "DocSpider.BuildingBlocks\DocSpider.BuildingBlocks.csproj", "{34952FA1-52B3-4F69-9DFA-D2B7216EB904}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocSpider.Application", "DocSpider.Application\DocSpider.Application.csproj", "{3801F2C2-BE99-456D-B8E6-F7C4BC50BDCA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,18 @@ Global
 		{34952FA1-52B3-4F69-9DFA-D2B7216EB904}.Release|x64.Build.0 = Release|Any CPU
 		{34952FA1-52B3-4F69-9DFA-D2B7216EB904}.Release|x86.ActiveCfg = Release|Any CPU
 		{34952FA1-52B3-4F69-9DFA-D2B7216EB904}.Release|x86.Build.0 = Release|Any CPU
+		{3801F2C2-BE99-456D-B8E6-F7C4BC50BDCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3801F2C2-BE99-456D-B8E6-F7C4BC50BDCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3801F2C2-BE99-456D-B8E6-F7C4BC50BDCA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3801F2C2-BE99-456D-B8E6-F7C4BC50BDCA}.Debug|x64.Build.0 = Debug|Any CPU
+		{3801F2C2-BE99-456D-B8E6-F7C4BC50BDCA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3801F2C2-BE99-456D-B8E6-F7C4BC50BDCA}.Debug|x86.Build.0 = Debug|Any CPU
+		{3801F2C2-BE99-456D-B8E6-F7C4BC50BDCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3801F2C2-BE99-456D-B8E6-F7C4BC50BDCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3801F2C2-BE99-456D-B8E6-F7C4BC50BDCA}.Release|x64.ActiveCfg = Release|Any CPU
+		{3801F2C2-BE99-456D-B8E6-F7C4BC50BDCA}.Release|x64.Build.0 = Release|Any CPU
+		{3801F2C2-BE99-456D-B8E6-F7C4BC50BDCA}.Release|x86.ActiveCfg = Release|Any CPU
+		{3801F2C2-BE99-456D-B8E6-F7C4BC50BDCA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
