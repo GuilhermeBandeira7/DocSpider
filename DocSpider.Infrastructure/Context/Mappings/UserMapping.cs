@@ -10,20 +10,17 @@ public class UserMapping : IEntityTypeConfiguration<User>
     {
         builder.ToTable("Users");
 
-        builder.HasKey(u => u.Id);
+        builder.HasKey(u => u.UserId);
 
-        builder.HasMany(u => u.Documents)
-            .WithOne(d => d.User)
-            .HasForeignKey(d => d.Id);
-
-        builder.Property(u => u.Id)
-            .HasColumnName("UserID")
-            .HasColumnType("UNIQUEIDENTIFIER")
+        builder.Property(u => u.UserId)
             .HasDefaultValueSql("NEWID()");
 
-        builder.Property(u => u.Name)
-            .HasColumnName("UserName")
-            .HasColumnType("NVARCHAR(50)");
+        builder.Property(u => u.UserName)
+            .IsRequired()
+            .HasMaxLength(50);
+
+        builder.HasIndex(u => u.UserName)
+            .HasDatabaseName("IX_Users_UserName");
     }
 }
 

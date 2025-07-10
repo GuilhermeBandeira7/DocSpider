@@ -9,7 +9,7 @@ namespace DocSpider.Web.Common.Endpoint.Documents
 {
     public record UploadDocumentRequest(IFormFile File);
 
-    public record UploadDocumentResponse(Response<Document> DocUploadResponse);
+    public record UploadDocumentResponse(Response<bool> uploadSuccess);
     
     public class UploadDocumentEndpoint : IEndpoint
     {
@@ -30,21 +30,21 @@ namespace DocSpider.Web.Common.Endpoint.Documents
 
             var document = new Document
             {
-                Name = request.File.FileName,
-                Type = Path.GetExtension(request.File.FileName),
-                Size = request.File.Length,
-                Content = memoryStream.ToArray(),
+                DocumentName = request.File.FileName,
+                FileType = Path.GetExtension(request.File.FileName),
+                FileSize = request.File.Length,
+                FileContent = memoryStream.ToArray(),
                 UploadDate = DateTime.Now,
-                UploadedBy = null
+                UserId = new Guid("C325B3E6-C92D-4F92-BCE2-D690A9248E13") //Zelone
             };
 
-            var command = document.Adapt<UploadDocumentCommand>();
+            var command = new UploadDocumentCommand(document);
 
             var result = await sender.Send(command);
 
             var response = result.Adapt<UploadDocumentResponse>();
 
-            return TypedResults.Created($"/{response.DocUploadResponse.Message}");
+            return TypedResults.Created($"/{response.uploadSuccess.Message}");
         }
     }
 }

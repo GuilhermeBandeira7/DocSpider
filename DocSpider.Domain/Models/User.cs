@@ -1,8 +1,8 @@
 ﻿namespace DocSpider.Domain.Models;
 public class User
 {
-    public Guid Id { get; set; }
-    public string? Name { get; set; }
-    public List<Document> Documents { get; set; } = [];
+    public Guid UserId { get; set; }
+    public string? UserName { get; set; }
+    public ICollection<Document> Documents { get; set; } = [];
 }
 
