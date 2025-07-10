@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddDataContexts();
 builder.AddMediatRDependency();
 builder.AddDocumentation();
+builder.AddValidations();
 
 var app = builder.Build();
 

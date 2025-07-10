@@ -1,5 +1,6 @@
-﻿using DocSpider.Infrastructure.Context;
-using Microsoft.AspNetCore.Antiforgery;
+﻿using DocSpider.BuildingBlocks.Behaviours;
+using DocSpider.Infrastructure.Context;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
 namespace DocSpider.Web.Common.Api;
@@ -19,7 +20,7 @@ public static class BuilderExtensions
         builder.Services.AddMediatR(config =>
         {
             config.RegisterServicesFromAssembly(typeof(Program).Assembly);
-            //config.AddOpenBehavior(typeof(ValidationBehavior<,>));
+            config.AddOpenBehavior(typeof(ValidationBehaviour<,>));
             //config.AddOpenBehavior(typeof(LoggingBehavior<,>));
         });
     }
@@ -32,6 +33,11 @@ public static class BuilderExtensions
            opts.CustomSchemaIds(n => n.FullName);
            //opts.OperationFilter<AntiforgeryApplicationBuilderExtensions>();
        });
+    }
+
+    public static void AddValidations(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
     }
 }
 
