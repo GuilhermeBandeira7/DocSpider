@@ -1,5 +1,4 @@
-﻿using DocSpider.Domain.Models;
-using DocSpider.Web.Common.Api;
+﻿using DocSpider.Web.Common.Api;
 using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

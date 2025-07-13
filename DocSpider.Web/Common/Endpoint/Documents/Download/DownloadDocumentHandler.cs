@@ -1,4 +1,4 @@
-﻿using DocSpider.BuildingBlocks.API;
+﻿
 using DocSpider.BuildingBlocks.CQRS;
 using DocSpider.Domain.Models;
 using DocSpider.Infrastructure.Context;
@@ -17,7 +17,7 @@ namespace DocSpider.Web.Common.Endpoint.Documents.Download
                 .FirstOrDefaultAsync(d => d.DocumentId == command.DocumentId, cancellationToken: cancellationToken);
 
             if (document == null || !Path.HasExtension(document.DocumentName))
-                return new Response<Document>(null, 404, "Document Not Found");
+                return new Response<Document>(null, 404, "Failed to download document");
 
             return new Response<Document>(document, 200, "Document Downloaded Successfully");
         }

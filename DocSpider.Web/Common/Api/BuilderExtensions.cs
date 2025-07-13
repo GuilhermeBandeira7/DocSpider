@@ -1,6 +1,7 @@
 ﻿using DocSpider.Application.Common.Interfaces;
 using DocSpider.Application.Features.Documents.Factories;
 using DocSpider.BuildingBlocks.Behaviours;
+using DocSpider.Domain;
 using DocSpider.Infrastructure.Context;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
@@ -30,11 +31,27 @@ public static class BuilderExtensions
     public static void AddDocumentation(this WebApplicationBuilder builder)
     {
         builder.Services.AddEndpointsApiExplorer();
-       builder.Services.AddSwaggerGen(opts => 
-       { 
-           opts.CustomSchemaIds(n => n.FullName);
-           //opts.OperationFilter<AntiforgeryApplicationBuilderExtensions>();
-       });
+        builder.Services.AddSwaggerGen(opts =>
+        {
+            opts.CustomSchemaIds(n => n.FullName);
+            //opts.OperationFilter<AntiforgeryApplicationBuilderExtensions>();
+        });
+    }
+
+    public static void AddCrossOrigin(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddCors(
+        options => options.AddPolicy(
+                    ApiConfiguration.CorsPolicyName,
+                    policy => policy
+                        .WithOrigins([
+                            Configuration.BackendUrl,
+                        Configuration.FrontendUrl
+                        ])
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials()
+                ));
     }
 
     public static void AddValidations(this WebApplicationBuilder builder)

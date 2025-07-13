@@ -1,11 +1,11 @@
 ﻿using DocSpider.Application.Common.Interfaces;
+using DocSpider.Domain.Models.Request;
 using DocSpider.Web.Common.Api;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DocSpider.Web.Common.Endpoint.Documents.Upload
 {
-    public record UploadDocumentRequest(IFormFile File);
 
     public class UploadDocumentEndpoint : IEndpoint
     {

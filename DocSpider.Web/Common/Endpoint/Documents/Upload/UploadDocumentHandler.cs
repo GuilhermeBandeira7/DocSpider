@@ -1,5 +1,4 @@
-﻿using DocSpider.BuildingBlocks.API;
-using DocSpider.BuildingBlocks.CQRS;
+﻿using DocSpider.BuildingBlocks.CQRS;
 using DocSpider.Domain.Models;
 using DocSpider.Infrastructure.Context;
 using FluentValidation;

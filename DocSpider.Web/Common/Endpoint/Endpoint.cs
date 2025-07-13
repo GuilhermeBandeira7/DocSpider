@@ -1,5 +1,6 @@
 ﻿using DocSpider.Web.Common.Api;
 using DocSpider.Web.Common.Endpoint.Documents.Download;
+using DocSpider.Web.Common.Endpoint.Documents.GetDocuments;
 using DocSpider.Web.Common.Endpoint.Documents.Upload;
 
 namespace DocSpider.Web.Common.Endpoint
@@ -18,7 +19,8 @@ namespace DocSpider.Web.Common.Endpoint
             endpoints.MapGroup("v1/documents")
             .WithTags("Documents")
             .MapEndpoint<UploadDocumentEndpoint>()
-            .MapEndpoint<DownloadDocumentEndpoint>();
+            .MapEndpoint<DownloadDocumentEndpoint>()
+            .MapEndpoint<GetDocumentsEndpoint>();
         }
 
         private static IEndpointRouteBuilder MapEndpoint<TEndpoint>(this IEndpointRouteBuilder app)
