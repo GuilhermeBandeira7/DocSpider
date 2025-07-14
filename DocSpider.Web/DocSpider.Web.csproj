@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DocSpider.Application\DocSpider.Application.csproj" />
     <ProjectReference Include="..\DocSpider.BuildingBlocks\DocSpider.BuildingBlocks.csproj" />
     <ProjectReference Include="..\DocSpider.Domain\DocSpider.Domain.csproj" />
     <ProjectReference Include="..\DocSpider.Infrastructure\DocSpider.Infrastructure.csproj" />
